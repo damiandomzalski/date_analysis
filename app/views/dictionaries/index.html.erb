@@ -1,0 +1,22 @@
+<h1><%= link_to "Analizator dat urodzin", root_path, class: "h1"%></h1>
+<p>Wpisz swoją datę urodzenia poniżej</p>
+
+<%= form_tag(root_path, method: :get) do %>
+  <%= text_field_tag :date %>
+  <%= submit_tag "Sprawdź!" %>
+<% end %>
+
+<% flash.each do |a, alert| %>
+  <%= alert %>
+<% end %>
+
+<br / >
+
+<% if @word_counts.zero? %>
+  <%= form_tag import_words_dictionaries_path, multipart: :true do %>
+    <%= file_field_tag :csv, class: "form-control padding-lg" %><br>
+    <%= submit_tag "Wczytaj plik CSV", class: "btn btn-lg btn-block btn-success" %>
+  <% end %>
+<% else %>
+  Baza danych zawiera <%= @word_counts %> słów!
+<% end %>
