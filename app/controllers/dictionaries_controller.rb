@@ -10,12 +10,11 @@ class DictionariesController < ApplicationController
 
   def import_words
     if params[:csv].present?
-      importer = CsvImportService.call(params[:csv].path)
-
-      if importer
+      begin
+        CsvImportService.new(params[:csv].path).call
         flash[:response] = "Słowa załadowane!"
         redirect_to root_path
-      else
+      rescue
         flash[:response] = "Coś poszło nie tak"
         redirect_to root_path
       end

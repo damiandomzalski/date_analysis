@@ -14,7 +14,7 @@
 
 <% if @word_counts.zero? %>
   <%= form_tag import_words_dictionaries_path, multipart: :true do %>
-    <%= file_field_tag :csv, class: "form-control padding-lg" %><br>
+    <%= file_field_tag :csv, accept: 'text/csv', class: "form-control padding-lg" %><br>
     <%= submit_tag "Wczytaj plik CSV", class: "btn btn-lg btn-block btn-success" %>
   <% end %>
 <% else %>
